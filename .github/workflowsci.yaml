@@ -1,0 +1,24 @@
+name: basil
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v4
+      - name: install HTMLHINT
+        run: npm install --save-dev htmlhint
+      - name: install stylelint
+        run: npm install --save-dev stylelint
+      - name: Lint Html
+        run: npx htmlhint "**/*.html"
+      - name: Lint style
+        run: npx stylelint "**/*.css"
+      - name: Displaying content
+        run: cat package.json
